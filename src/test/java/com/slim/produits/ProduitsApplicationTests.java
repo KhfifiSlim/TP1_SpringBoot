@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
+import com.slim.produits.entities.Categorie;
 import com.slim.produits.entities.Produit;
 import com.slim.produits.repos.ProduitRepository;
 import com.slim.produits.service.ProduitService;
@@ -48,7 +49,7 @@ class ProduitsApplicationTests {
 	}
 	}
 	@Test
-	public void testFindByNomProduitContains()
+	public void testFindByNomProduitContains1()
 	{
 	Page<Produit> prods = produitService.getAllProduitsParPage(0,2);
 	System.out.println(prods.getSize());
@@ -60,5 +61,67 @@ class ProduitsApplicationTests {
 	{
 	System.out.println(p);
 	} */
+	}
+	@Test
+	public void testFindByNomProduit()
+	{
+	List<Produit> prods = produitRepository.findByNomProduit("PC Dell");
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	@Test
+	public void testFindByNomProduitContains()
+	{
+	List<Produit> prods=produitRepository.findByNomProduitContains("P");
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	} }
+	@Test public void testfindByNomPrix()
+	{
+	List<Produit> prods = produitRepository.findByNomPrix("Clavier gamer",150.0);
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	@Test
+	public void testfindByCategorie()
+	{
+	Categorie cat = new Categorie();
+	cat.setIdCat(1L);
+	List<Produit> prods = produitRepository.findByCategorie(cat);
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	@Test
+	public void findByCategorieIdCat()
+	{
+	List<Produit> prods = produitRepository.findByCategorieIdCat(1L);
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	@Test
+	public void testfindByOrderByNomProduitAsc()
+	{
+	List<Produit> prods = produitRepository.findByOrderByNomProduitAsc();
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	@Test public void testTrierProduitsNomsPrix()
+	{
+	List<Produit> prods = produitRepository.trierProduitsNomsPrix();
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
 	}
 }
